@@ -1,0 +1,183 @@
+{% extends 'layout.html' %}
+
+{% block title %}Search{% endblock %}
+
+{% block content %}
+
+<style>
+    #criminal {
+      font-family: Arial, Helvetica, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    #criminal td, #criminal th {
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
+    
+    #criminal tr:nth-child(even){background-color: #f2f2f2;}
+    
+    #criminal tr:hover {background-color: rgb(242, 206, 246);}
+    
+    #criminal th {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      text-align: left;
+      background-color: #341a2e;
+      color: white;
+    }
+    #criminal a:link, #criminal a:visited {
+        background-color:  rgb(46, 3, 40);
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+    }
+    td {
+    display: table-cell;
+    vertical-align: inherit;
+    }
+    #criminal a:hover,#criminal a:active {
+        background-color: rgb(126, 26, 118);
+    }
+    </style>
+
+<div id="criminal">
+    <a href="{{ url_for('googlemap') }}" class="active">search Location</a> 
+<h2>Search the Criminal</h2>
+
+<form class="example" method="post" action="{{ url_for('search') }}" 
+         style="margin:auto;max-width:600px">
+            <input type="text" placeholder="Search Info" name="username" required>
+            <input type="submit" value="Search by Name" name="name">
+            <input type="submit" value="Search by Area" name="area">
+            <input type="submit" value="Search by Crime" name="crime">
+            
+        </form>
+        </div>
+        
+        <center>
+            <table id="criminal" >
+                <tr>{% for header in heading %}
+                    <th>{{header}}</th>
+                    {% endfor %}
+                </tr>
+
+        </tr>
+            
+        {% for item in data %}
+        <tr>
+          <td>{{item[0]}}</td>
+            <td> {{item[1]}}</td>
+            <td> {{item[2]}} </td> 
+            <td> {{item[3]}} </td> 
+            {% if item[4] != null: %}
+                <td> {{item[4]}} </td> 
+                <td> {{item[5]}} </td> 
+	        {% endif %}
+            <td><a href="/pythonlogin/detail/{{item[0]}}" >detail</a></td>
+          </tr>
+        {% endfor %}
+        </table>
+      </center>
+
+  
+      <center>
+        <table id="criminal" >
+       
+    {% for item in detail %}
+ 
+    <tr>
+            <td>Number:</td>
+            <td>{{item[0]}}</td>
+        </tr>
+          <tr>
+            <td>Gender:</td>
+            <td>{{item[1]}}</td>
+        </tr>
+        <tr>
+            <td>NameSet:</td>
+            <td>{{item[2]}}</td>
+        </tr>
+         <tr>
+            <td>GivenName:</td>
+            <td>{{item[3]}}</td>
+        </tr>
+         <tr>
+            <td>Surname:</td>
+            <td>{{item[4]}}</td>
+        </tr>
+         <tr>
+            <td>StreetAddress:</td>
+            <td>{{item[5]}}</td>
+        </tr>
+         <tr>
+            <td>City:</td>
+            <td>{{item[6]}}</td>
+        </tr>
+         <tr>
+            <td>StateFull:</td>
+            <td>{{item[7]}}</td>
+        </tr>
+        <tr>
+            <td>ZipCode:</td>
+            <td>{{item[8]}}</td>
+        </tr>
+        <tr>
+            <td>CountryFull:</td>
+            <td>{{item[9]}}</td>
+        </tr>
+        <tr>
+            <td>EmailAddress:</td>
+            <td>{{item[10]}}</td>
+        </tr>
+        <tr>
+            <td>TelephoneNumber:</td>
+            <td>{{item[11]}}</td>
+        </tr>
+        <tr>
+            <td>Birthday:</td>
+            <td>{{item[12]}}</td>
+        </tr>
+        <tr>
+            <td>Age:</td>
+            <td>{{item[13]}}</td>
+        </tr>
+        <tr>
+            <td>Occupation:</td>
+            <td>{{item[14]}}</td>
+        </tr>
+        <tr>
+            <td>Company:</td>
+            <td>{{item[15]}}</td>
+        </tr>
+        <tr>
+            <td>Vehicle:</td>
+            <td>{{item[16]}}</td>
+        </tr>
+        <tr>
+            <td>BloodType:</td>
+            <td>{{item[17]}}</td>
+        </tr>
+        <tr>
+            <td>Kilograms:</td>
+            <td>{{item[18]}}</td>
+        </tr>
+        <tr>
+            <td>FeetInches:</td>
+            <td>{{item[19]}}</td>
+        </tr>
+        <tr>
+            <td>CrimeType:</td>
+            <td>{{item[20]}}</td>
+        </tr>
+       
+       
+    {% endfor %}
+ </table>
+     
+      </center>
+      <div class="msg">{{ msg }}{{ username }}</div>
+{% endblock %}
